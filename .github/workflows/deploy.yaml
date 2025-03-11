@@ -19,10 +19,10 @@ jobs:
       - name: Deploy to EB
         uses: agathamayfair/beanstalk-deploy@v18
         with:
-          application_name: ${{ secrets.APP }}
-          environment_name: ${{ secrets.ENV }}
-          existing_bucket_name: ${{ secrets.BUCKET_NAME }}
-          region: ${{ secrets.REGION }}
+          application_name: frontend
+          environment_name: Frontend-env
+          existing_bucket_name: elasticbeanstalk-us-east-1-339712906508
+          region: us-east-1
 	  version_label: ${{ github.sha }}
           deployment_package: deploy.zip
 	  
