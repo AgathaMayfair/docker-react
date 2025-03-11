@@ -12,3 +12,18 @@ jobs:
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - run: docker build -t agathamayfair/docker-react -f Dockerfile.dev .
       - run: docker run -e CI=true agathamayfair/docker-react npm run test
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: agathamayfair/beanstalk-deploy@v18
+        with:
+          application_name: ${{ secrets.APP }}
+          environment_name: ${{ secrets.ENV }}
+          existing_bucket_name: ${{ secrets.BUCKET_NAME }}
+          region: ${{ secrets.REGION }}
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
+	  accessKey: ${{ secrets.AWS_ACCESS_KEY }}
+	  secretKey: ${{ secrets.AWS_SECRET_KEY }}
