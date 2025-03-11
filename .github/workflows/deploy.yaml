@@ -23,8 +23,8 @@ jobs:
           environment_name: ${{ secrets.ENV }}
           existing_bucket_name: ${{ secrets.BUCKET_NAME }}
           region: ${{ secrets.REGION }}
-          accessKey: ${{ secrets.AWS_ACCESS_KEY }}
-	  secretKey: ${{ secrets.AWS_SECRET_KEY }}
+          access_key: ${{ secrets.AWS_ACCESS_KEY }}
+	  secret_key: ${{ secrets.AWS_SECRET_KEY }}
 	  version_label: ${{ github.sha }}
           deployment_package: deploy.zip
 	  
